@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <xs:element name="hospital" type="HospitalType"/>
+
+    <xs:complexType name="HospitalType">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="departments" type="DepartmentsType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="DepartmentsType">
+        <xs:sequence>
+            <xs:element name="department" type="DepartmentType" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="DepartmentType">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="doctors" type="DoctorsType" minOccurs="0"/>
+            <xs:element name="patients" type="PatientsType" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="code" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="DoctorsType">
+        <xs:sequence>
+            <xs:element name="doctor" type="DoctorType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="DoctorType">
+        <xs:sequence>
+            <xs:element name="fullName" type="xs:string"/>
+            <xs:element name="specialty" type="xs:string"/>
+            <xs:element name="onDuty" type="xs:boolean"/>
+            <xs:element name="hiredDate" type="xs:date"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="PatientsType">
+        <xs:sequence>
+            <xs:element name="patient" type="PatientType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="PatientType">
+        <xs:sequence>
+            <xs:element name="fullName" type="xs:string"/>
+            <xs:element name="birthDate" type="xs:date"/>
+            <xs:element name="insured" type="xs:boolean"/>
+            <xs:element name="admission" type="AdmissionType" minOccurs="0"/>
+            <xs:element name="treatment" type="TreatmentType" minOccurs="0"/>
+            <xs:element name="appointments" type="AppointmentsType" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="AdmissionType">
+        <xs:sequence>
+            <xs:element name="admittedDate" type="xs:date"/>
+            <xs:element name="room" type="RoomType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="RoomType">
+        <xs:sequence>
+            <xs:element name="number" type="xs:string"/>
+            <xs:element name="capacity" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="TreatmentType">
+        <xs:sequence>
+            <xs:element name="diagnosis" type="xs:string"/>
+            <xs:element name="prescriptions" type="PrescriptionsType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="PrescriptionsType">
+        <xs:sequence>
+            <xs:element name="prescription" type="PrescriptionType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="PrescriptionType">
+        <xs:sequence>
+            <xs:element name="medication" type="xs:string"/>
+            <xs:element name="dosageMg" type="xs:int"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="AppointmentsType">
+        <xs:sequence>
+            <xs:element name="appointment" type="AppointmentType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="AppointmentType">
+        <xs:sequence>
+            <xs:element name="dateTime" type="xs:dateTime"/>
+            <xs:element name="purpose" type="xs:string"/>
+            <xs:element name="billAmount" type="xs:double"/>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>
+
+
+
+

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hospital>
+    <name>City General Hospital</name>
+    <department code="CARD">
+        <name>Cardiology</name>
+        <doctor id="D1">
+            <fullName>Dr. Alice Heart</fullName>
+            <specialty>Cardiologist</specialty>
+            <onDuty>true</onDuty>
+            <hiredDate>2015-03-15</hiredDate>
+        </doctor>
+        <doctor id="D2">
+            <fullName>Dr. Bob Valve</fullName>
+            <specialty>Cardiothoracic Surgeon</specialty>
+            <onDuty>false</onDuty>
+            <hiredDate>2018-06-01</hiredDate>
+        </doctor>
+        <patient id="P1001">
+            <fullName>John Doe</fullName>
+            <birthDate>1980-11-22</birthDate>
+            <insured>true</insured>
+            <appointment>
+                <dateTime>2025-10-28T09:30:00</dateTime>
+                <purpose>Follow-up</purpose>
+                <billAmount>120.5</billAmount>
+            </appointment>
+            <appointment>
+                <dateTime>2025-11-05T14:00:00</dateTime>
+                <purpose>Stress test</purpose>
+                <billAmount>350.0</billAmount>
+            </appointment>
+        </patient>
+    </department>
+    <department code="NEUR">
+        <name>Neurology</name>
+        <doctor id="D3">
+            <fullName>Dr. Carol Brain</fullName>
+            <specialty>Neurologist</specialty>
+            <onDuty>true</onDuty>
+            <hiredDate>2020-01-10</hiredDate>
+        </doctor>
+        <patient id="P2001">
+            <fullName>Mary Smith</fullName>
+            <birthDate>1975-02-14</birthDate>
+            <insured>false</insured>
+            <appointment>
+                <dateTime>2025-12-01T10:15:00</dateTime>
+                <purpose>MRI Consultation</purpose>
+                <billAmount>220.0</billAmount>
+            </appointment>
+        </patient>
+    </department>
+</hospital>

@@ -1,0 +1,43 @@
+{
+  "name": "City General Hospital",
+  "departments": [
+    {
+      "code": "CARD",
+      "name": "Cardiology",
+      "doctors": [
+        {"id": "D1", "fullName": "Dr. Alice Heart", "specialty": "Cardiologist", "onDuty": true, "hiredDate": "2015-03-15"},
+        {"id": "D2", "fullName": "Dr. Bob Valve", "specialty": "Cardiothoracic Surgeon", "onDuty": false, "hiredDate": "2018-06-01"}
+      ],
+      "patients": [
+        {
+          "id": "P1001",
+          "fullName": "John Doe",
+          "birthDate": "1980-11-22",
+          "insured": true,
+          "appointments": [
+            {"dateTime": "2025-10-28T09:30:00", "purpose": "Follow-up", "billAmount": 120.5},
+            {"dateTime": "2025-11-05T14:00:00", "purpose": "Stress test", "billAmount": 350.0}
+          ]
+        }
+      ]
+    },
+    {
+      "code": "NEUR",
+      "name": "Neurology",
+      "doctors": [
+        {"id": "D3", "fullName": "Dr. Carol Brain", "specialty": "Neurologist", "onDuty": true, "hiredDate": "2020-01-10"}
+      ],
+      "patients": [
+        {
+          "id": "P2001",
+          "fullName": "Mary Smith",
+          "birthDate": "1975-02-14",
+          "insured": false,
+          "appointments": [
+            {"dateTime": "2025-12-01T10:15:00", "purpose": "MRI Consultation", "billAmount": 220.0}
+          ]
+        }
+      ]
+    }
+  ]
+}
