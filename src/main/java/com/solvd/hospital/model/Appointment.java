@@ -5,6 +5,7 @@ import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -19,7 +20,7 @@ public class Appointment {
     private String purpose;
 
     @XmlElement
-    private double billAmount;
+    private BigDecimal billAmount;
 
     public LocalDateTime getDateTime() {
         return dateTime;
@@ -37,11 +38,11 @@ public class Appointment {
         this.purpose = purpose;
     }
 
-    public double getBillAmount() {
+    public BigDecimal getBillAmount() {
         return billAmount;
     }
 
-    public void setBillAmount(double billAmount) {
+    public void setBillAmount(BigDecimal billAmount) {
         this.billAmount = billAmount;
     }
 
