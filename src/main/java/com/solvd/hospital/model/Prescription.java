@@ -1,4 +1,4 @@
-package com.hospital.model;
+package com.solvd.hospital.model;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
@@ -16,15 +16,6 @@ public class Prescription {
 
     @XmlElement
     private int dosageMg;
-
-    public Prescription() {
-    }
-
-    public Prescription(String id, String medication, int dosageMg) {
-        this.id = id;
-        this.medication = medication;
-        this.dosageMg = dosageMg;
-    }
 
     public String getId() {
         return id;

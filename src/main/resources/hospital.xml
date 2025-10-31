@@ -31,23 +31,25 @@
             </appointment>
         </patient>
     </department>
-    <department code="NEUR">
-        <name>Neurology</name>
-        <doctor id="D3">
-            <fullName>Dr. Carol Brain</fullName>
-            <specialty>Neurologist</specialty>
-            <onDuty>true</onDuty>
-            <hiredDate>2020-01-10</hiredDate>
-        </doctor>
-        <patient id="P2001">
-            <fullName>Mary Smith</fullName>
-            <birthDate>1975-02-14</birthDate>
-            <insured>false</insured>
-            <appointment>
-                <dateTime>2025-12-01T10:15:00</dateTime>
-                <purpose>MRI Consultation</purpose>
-                <billAmount>220.0</billAmount>
-            </appointment>
-        </patient>
-    </department>
+    <departments>
+        <department code="NEUR">
+            <name>Neurology</name>
+            <doctor id="D3">
+                <fullName>Dr. Carol Brain</fullName>
+                <specialty>Neurologist</specialty>
+                <onDuty>true</onDuty>
+                <hiredDate>2020-01-10</hiredDate>
+            </doctor>
+            <patient id="P2001">
+                <fullName>Mary Smith</fullName>
+                <birthDate>1975-02-14</birthDate>
+                <insured>false</insured>
+                <appointment>
+                    <dateTime>2025-12-01T10:15:00</dateTime>
+                    <purpose>MRI Consultation</purpose>
+                    <billAmount>220.0</billAmount>
+                </appointment>
+            </patient>
+        </department>
+    </departments>
 </hospital>

@@ -1,8 +1,8 @@
-package com.hospital.parser;
+package com.solvd.hospital.parser;
 
-import com.hospital.model.Hospital;
-import com.hospital.model.Department;
-import com.hospital.model.Doctor;
+import com.solvd.hospital.model.Hospital;
+import com.solvd.hospital.model.Department;
+import com.solvd.hospital.model.Doctor;
 
 import javax.xml.XMLConstants;
 import javax.xml.stream.XMLEventReader;
@@ -16,12 +16,12 @@ import java.io.InputStream;
 import java.time.LocalDate;
 
 /**
- * XPath examples:
- * 1) /hospital/name - gets hospital name
- * 2) /hospital/departments/department - finds all departments
- * 3) /hospital/departments/department/@code - gets department code attribute
- * 4) /hospital/departments/department/doctors/doctor - finds all doctors
- * 5) /hospital/departments/department/doctors/doctor/fullName - gets doctor name
+  * Example XPaths:
+ * 1. /hospital/departments/department[@name='Emergency']
+ * 2. /hospital/departments/department/doctors/doctor[@id='D001']
+ * 3. /hospital/patients/patient[age &gt; 60]
+ * 4. /hospital/departments/department/rooms/room[isAvailable='true']
+ * 5. /hospital/patients/patient[treatments/treatment/type='Surgery']
  */
 public class StaxHospitalParser {
 

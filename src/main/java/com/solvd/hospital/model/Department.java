@@ -1,16 +1,26 @@
-package com.hospital.model;
+package com.solvd.hospital.model;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Department {
 
+    @XmlAttribute
+    private Long id;
+
     private String code;
     private String name;
-    private List<Doctor> doctors = new ArrayList<>();
-    private List<Patient> patients = new ArrayList<>();
+    private List<Doctor> doctors;
+    private List<Patient> patients;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     @XmlAttribute
     public String getCode() {

@@ -1,4 +1,4 @@
-package com.hospital.model;
+package com.solvd.hospital.model;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
@@ -9,18 +9,13 @@ import jakarta.xml.bind.annotation.XmlElement;
 public class Room {
 
     @XmlAttribute
+    private Long id;
+
+    @XmlAttribute
     private String number;
 
     @XmlElement
     private int capacity;
-
-    public Room() {
-    }
-
-    public Room(String number, int capacity) {
-        this.number = number;
-        this.capacity = capacity;
-    }
 
     public String getNumber() {
         return number;
@@ -36,6 +31,14 @@ public class Room {
 
     public void setCapacity(int capacity) {
         this.capacity = capacity;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
 

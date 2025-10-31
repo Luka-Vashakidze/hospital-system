@@ -1,4 +1,4 @@
-package com.hospital.model;
+package com.solvd.hospital.model;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
@@ -24,17 +24,6 @@ public class Doctor {
 
     @XmlElement
     private LocalDate hiredDate;
-
-    public Doctor() {
-    }
-
-    public Doctor(String id, String fullName, String specialty, boolean onDuty, LocalDate hiredDate) {
-        this.id = id;
-        this.fullName = fullName;
-        this.specialty = specialty;
-        this.onDuty = onDuty;
-        this.hiredDate = hiredDate;
-    }
 
     public String getId() {
         return id;

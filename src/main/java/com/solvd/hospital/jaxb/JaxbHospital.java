@@ -1,6 +1,6 @@
-package com.hospital.jaxb;
+package com.solvd.hospital.jaxb;
 
-import com.hospital.model.Hospital;
+import com.solvd.hospital.model.Hospital;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.Unmarshaller;
 

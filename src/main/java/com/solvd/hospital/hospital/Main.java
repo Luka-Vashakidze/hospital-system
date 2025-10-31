@@ -1,9 +1,9 @@
-package com.hospital.hospital;
+package com.solvd.hospital.hospital;
 
-import com.hospital.jaxb.JaxbHospital;
-import com.hospital.json.JacksonHospital;
-import com.hospital.model.Hospital;
-import com.hospital.parser.StaxHospitalParser;
+import com.solvd.hospital.jaxb.JaxbHospital;
+import com.solvd.hospital.json.JacksonHospital;
+import com.solvd.hospital.model.Hospital;
+import com.solvd.hospital.parser.StaxHospitalParser;
 
 import java.io.InputStream;
 

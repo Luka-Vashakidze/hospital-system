@@ -1,13 +1,17 @@
-package com.hospital.model;
+package com.solvd.hospital.model;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
 
 import java.time.LocalDateTime;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Appointment {
+
+    @XmlAttribute
+    private Long id;
 
     @XmlElement
     private LocalDateTime dateTime;
@@ -16,15 +20,6 @@ public class Appointment {
 
     @XmlElement
     private double billAmount;
-
-    public Appointment() {
-    }
-
-    public Appointment(LocalDateTime dateTime, String purpose, double billAmount) {
-        this.dateTime = dateTime;
-        this.purpose = purpose;
-        this.billAmount = billAmount;
-    }
 
     public LocalDateTime getDateTime() {
         return dateTime;
@@ -48,6 +43,14 @@ public class Appointment {
 
     public void setBillAmount(double billAmount) {
         this.billAmount = billAmount;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
 

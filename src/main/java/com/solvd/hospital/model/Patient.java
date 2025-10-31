@@ -1,4 +1,4 @@
-package com.hospital.model;
+package com.solvd.hospital.model;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
@@ -7,7 +7,6 @@ import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlElementWrapper;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -27,23 +26,13 @@ public class Patient {
 
     @XmlElementWrapper(name = "appointments")
     @XmlElement(name = "appointment")
-    private List<Appointment> appointments = new ArrayList<>();
+    private List<Appointment> appointments;
 
     @XmlElement
     private Admission admission;
 
     @XmlElement
     private Treatment treatment;
-
-    public Patient() {
-    }
-
-    public Patient(String id, String fullName, LocalDate birthDate, boolean insured) {
-        this.id = id;
-        this.fullName = fullName;
-        this.birthDate = birthDate;
-        this.insured = insured;
-    }
 
     public String getId() {
         return id;
