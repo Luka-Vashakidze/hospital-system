@@ -11,7 +11,7 @@ import java.time.LocalDate;
 public class Doctor {
 
     @XmlAttribute
-    private String id;
+    private Long id;
 
     @XmlElement
     private String fullName;
@@ -25,11 +25,11 @@ public class Doctor {
     @XmlElement
     private LocalDate hiredDate;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

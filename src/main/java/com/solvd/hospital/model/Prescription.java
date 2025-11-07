@@ -9,7 +9,7 @@ import jakarta.xml.bind.annotation.XmlElement;
 public class Prescription {
 
     @XmlAttribute
-    private String id;
+    private Long id;
 
     @XmlElement
     private String medication;
@@ -17,11 +17,11 @@ public class Prescription {
     @XmlElement
     private int dosageMg;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 

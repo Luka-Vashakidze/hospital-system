@@ -13,7 +13,7 @@ import java.util.List;
 public class Patient {
 
     @XmlAttribute
-    private String id;
+    private Long id;
 
     @XmlElement
     private String fullName;
