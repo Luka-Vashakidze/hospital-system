@@ -71,26 +71,6 @@ CREATE TABLE IF NOT EXISTS `mydb`.`doctors` (
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
--- -----------------------------------------------------
--- Table `mydb`.`doctor_patient`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`doctor_patient` (
-  `doctor_id` BIGINT UNSIGNED NOT NULL,
-  `patient_id` BIGINT UNSIGNED NOT NULL,
-  `assigned_date` DATE DEFAULT CURRENT_DATE,
-  PRIMARY KEY (`doctor_id`, `patient_id`),
-  CONSTRAINT `fk_doctor_patient_doctor`
-    FOREIGN KEY (`doctor_id`)
-    REFERENCES `mydb`.`doctors` (`id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_doctor_patient_patient`
-    FOREIGN KEY (`patient_id`)
-    REFERENCES `mydb`.`patients` (`id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE
-) ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table `mydb`.`insurance_types`
@@ -110,7 +90,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`insurances` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `insurance_type_id` BIGINT NULL,
+  `insurance_type_id` BIGINT NOT NULL,
   `policy_number` VARCHAR(45) NULL,
   `insured` TINYINT(0) NOT NULL DEFAULT 0,
   `expiry_date` DATE NULL,
