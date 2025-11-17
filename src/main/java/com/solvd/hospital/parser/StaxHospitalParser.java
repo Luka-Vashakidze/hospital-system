@@ -59,7 +59,7 @@ public class StaxHospitalParser {
                 if (elementName.equals("doctor")) {
                     doctor = new Doctor();
                     String id = startElement.getAttributeByName(new javax.xml.namespace.QName("id")).getValue();
-                    doctor.setId(id);
+                    doctor.setId(Long.valueOf(id));
                 }
             }
 
