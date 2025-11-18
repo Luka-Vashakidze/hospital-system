@@ -14,7 +14,7 @@ public class Admission {
     private Long id;
 
     @XmlElement
-    private LocalDate admittedDate; // date
+    private LocalDate admittedDate;
 
     @XmlElement
     private Room room;

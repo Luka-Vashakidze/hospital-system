@@ -1,9 +1,15 @@
-package com.solvd.hospital.hospital;
+package com.solvd.hospital;
 
+import com.solvd.hospital.controller.HospitalController;
 import com.solvd.hospital.jaxb.JaxbHospital;
 import com.solvd.hospital.json.JacksonHospital;
 import com.solvd.hospital.model.Hospital;
 import com.solvd.hospital.parser.StaxHospitalParser;
+import com.solvd.hospital.service.impl.AppointmentServiceImpl;
+import com.solvd.hospital.service.impl.DepartmentServiceImpl;
+import com.solvd.hospital.service.impl.DoctorServiceImpl;
+import com.solvd.hospital.service.impl.HospitalServiceImpl;
+import com.solvd.hospital.service.impl.PatientServiceImpl;
 
 import java.io.InputStream;
 
@@ -18,9 +24,9 @@ public class Main {
              InputStream jsonForJackson = cl.getResourceAsStream("hospital.json");
              InputStream jsonForJsonPath = cl.getResourceAsStream("hospital.json")) {
 
-//            if (xsd == null || xmlForValidation == null || xmlForStax == null || xmlForJaxb == null || jsonForJackson == null || jsonForJsonPath == null) {
-//                throw new IllegalStateException("resources not found");
-//            }
+            if (xsd == null || xmlForValidation == null || xmlForStax == null || xmlForJaxb == null || jsonForJackson == null || jsonForJsonPath == null) {
+                throw new IllegalStateException("resources not found");
+            }
 
             StaxHospitalParser stax = new StaxHospitalParser();
             stax.validateAgainstXsd(xmlForValidation, xsd);
@@ -39,6 +45,16 @@ public class Main {
 
             jackson.jsonPathPrints(jsonForJsonPath);
         }
+
+        HospitalController controller = new HospitalController(
+                new HospitalServiceImpl(),
+                new DepartmentServiceImpl(),
+                new DoctorServiceImpl(),
+                new PatientServiceImpl(),
+                new AppointmentServiceImpl()
+        );
+        System.out.println("MVC task completed: " + controller.getClass().getSimpleName()
+                + " is ready with JDBC-backed services.");
     }
 }
 
