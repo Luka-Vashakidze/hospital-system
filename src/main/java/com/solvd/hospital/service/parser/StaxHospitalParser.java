@@ -1,8 +1,8 @@
-package com.solvd.hospital.parser;
+package com.solvd.hospital.service.parser;
 
-import com.solvd.hospital.model.Hospital;
-import com.solvd.hospital.model.Department;
-import com.solvd.hospital.model.Doctor;
+import com.solvd.hospital.domain.Department;
+import com.solvd.hospital.domain.Doctor;
+import com.solvd.hospital.domain.Hospital;
 
 import javax.xml.XMLConstants;
 import javax.xml.stream.XMLEventReader;

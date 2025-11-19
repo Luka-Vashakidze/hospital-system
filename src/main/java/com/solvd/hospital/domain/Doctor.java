@@ -1,15 +1,26 @@
 package com.solvd.hospital.domain;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Doctor {
+    @XmlAttribute
     private Long id;
     private Long departmentId;
+    @XmlElement
     private String fullName;
+    @XmlElement
     private String specialty;
     private String phone;
     private String email;
+    @XmlElement
+    private boolean onDuty;
     private LocalDate hiredDate;
 
     public Long getId() {
@@ -58,6 +69,14 @@ public class Doctor {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public boolean isOnDuty() {
+        return onDuty;
+    }
+
+    public void setOnDuty(boolean onDuty) {
+        this.onDuty = onDuty;
     }
 
     public LocalDate getHiredDate() {

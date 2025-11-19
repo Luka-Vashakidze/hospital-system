@@ -1,15 +1,24 @@
 package com.solvd.hospital.domain;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Appointment {
+    @XmlAttribute
     private Long id;
     private Long departmentId;
     private Long doctorId;
     private Long patientId;
     private LocalDateTime dateTime;
+    @XmlElement
+    private String purpose;
     private String status;
     private BigDecimal billAmount;
 
@@ -51,6 +60,14 @@ public class Appointment {
 
     public void setDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
+    }
+
+    public String getPurpose() {
+        return purpose;
+    }
+
+    public void setPurpose(String purpose) {
+        this.purpose = purpose;
     }
 
     public String getStatus() {

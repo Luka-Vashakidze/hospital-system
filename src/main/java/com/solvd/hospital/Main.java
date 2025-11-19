@@ -1,10 +1,10 @@
 package com.solvd.hospital;
 
 import com.solvd.hospital.controller.HospitalController;
-import com.solvd.hospital.jaxb.JaxbHospital;
-import com.solvd.hospital.json.JacksonHospital;
-import com.solvd.hospital.model.Hospital;
-import com.solvd.hospital.parser.StaxHospitalParser;
+import com.solvd.hospital.domain.Hospital;
+import com.solvd.hospital.service.parser.StaxHospitalParser;
+import com.solvd.hospital.service.parser.jaxb.JaxbHospital;
+import com.solvd.hospital.service.parser.json.JacksonHospital;
 import com.solvd.hospital.service.impl.AppointmentServiceImpl;
 import com.solvd.hospital.service.impl.DepartmentServiceImpl;
 import com.solvd.hospital.service.impl.DoctorServiceImpl;
@@ -54,7 +54,7 @@ public class Main {
                 new AppointmentServiceImpl()
         );
         System.out.println("MVC task completed: " + controller.getClass().getSimpleName()
-                + " is ready with JDBC-backed services.");
+                + " is ready with JDBC backed services.");
     }
 }
 

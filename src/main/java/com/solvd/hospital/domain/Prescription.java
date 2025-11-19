@@ -1,4 +1,4 @@
-package com.solvd.hospital.model;
+package com.solvd.hospital.domain;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
@@ -7,13 +7,10 @@ import jakarta.xml.bind.annotation.XmlElement;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Prescription {
-
     @XmlAttribute
     private Long id;
-
     @XmlElement
     private String medication;
-
     @XmlElement
     private int dosageMg;
 
@@ -21,7 +18,7 @@ public class Prescription {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -41,8 +38,4 @@ public class Prescription {
         this.dosageMg = dosageMg;
     }
 }
-
-
-
-
 

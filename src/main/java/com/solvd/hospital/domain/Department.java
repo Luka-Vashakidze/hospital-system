@@ -1,13 +1,30 @@
 package com.solvd.hospital.domain;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElementWrapper;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Department {
+    @XmlAttribute
     private Long id;
     private Long hospitalId;
+    @XmlAttribute
     private String code;
     private String name;
     private String description;
+    @XmlElementWrapper(name = "doctors")
+    @XmlElement(name = "doctor")
+    private List<Doctor> doctors = new ArrayList<>();
+    @XmlElementWrapper(name = "patients")
+    @XmlElement(name = "patient")
+    private List<Patient> patients = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -47,6 +64,22 @@ public class Department {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<Doctor> getDoctors() {
+        return doctors;
+    }
+
+    public void setDoctors(List<Doctor> doctors) {
+        this.doctors = doctors;
+    }
+
+    public List<Patient> getPatients() {
+        return patients;
+    }
+
+    public void setPatients(List<Patient> patients) {
+        this.patients = patients;
     }
 
     @Override

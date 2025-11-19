@@ -1,4 +1,4 @@
-package com.solvd.hospital.model;
+package com.solvd.hospital.domain;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
@@ -9,15 +9,20 @@ import java.time.LocalDate;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Admission {
-
     @XmlAttribute
     private Long id;
-
     @XmlElement
     private LocalDate admittedDate;
-
     @XmlElement
     private Room room;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public LocalDate getAdmittedDate() {
         return admittedDate;
@@ -34,17 +39,5 @@ public class Admission {
     public void setRoom(Room room) {
         this.room = room;
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 }
-
-
-
-
 

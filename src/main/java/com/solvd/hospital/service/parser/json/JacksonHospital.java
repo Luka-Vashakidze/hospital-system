@@ -1,9 +1,9 @@
-package com.solvd.hospital.json;
+package com.solvd.hospital.service.parser.json;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.solvd.hospital.model.Hospital;
+import com.solvd.hospital.domain.Hospital;
 import com.jayway.jsonpath.Configuration;
 import com.jayway.jsonpath.JsonPath;
 

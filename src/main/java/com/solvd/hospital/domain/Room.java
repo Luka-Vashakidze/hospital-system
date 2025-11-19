@@ -1,11 +1,21 @@
 package com.solvd.hospital.domain;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+
 import java.util.Objects;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Room {
+    @XmlAttribute
     private Long id;
     private Long departmentId;
+    @XmlAttribute
     private String number;
+    @XmlElement
+    private int capacity;
     private boolean available;
 
     public Long getId() {
@@ -30,6 +40,14 @@ public class Room {
 
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 
     public boolean isAvailable() {

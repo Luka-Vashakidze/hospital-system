@@ -1,9 +1,21 @@
 package com.solvd.hospital.domain;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElementWrapper;
+import jakarta.xml.bind.annotation.XmlRootElement;
+
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
+@XmlRootElement(name = "hospital")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Hospital {
+    @XmlAttribute
     private Long id;
     private String name;
     private String address;
@@ -11,6 +23,9 @@ public class Hospital {
     private String email;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    @XmlElementWrapper(name = "departments")
+    @XmlElement(name = "department")
+    private List<Department> departments = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -66,6 +81,14 @@ public class Hospital {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public List<Department> getDepartments() {
+        return departments;
+    }
+
+    public void setDepartments(List<Department> departments) {
+        this.departments = departments;
     }
 
     @Override
