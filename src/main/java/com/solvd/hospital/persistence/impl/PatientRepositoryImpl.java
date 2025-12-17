@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class PatientRepositoryImpl implements PatientRepository {
+
     private static final String INSERT_SQL = "INSERT INTO patients (full_name, birth_date, gender, phone, insurance_id) VALUES (?, ?, ?, ?, ?)";
     private static final String SELECT_BY_ID_SQL = "SELECT * FROM patients WHERE id = ?";
     private static final String SELECT_ALL_SQL = "SELECT * FROM patients";

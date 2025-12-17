@@ -1,7 +1,9 @@
 package com.solvd.hospital.service.impl;
 
 import com.solvd.hospital.domain.Hospital;
+import com.solvd.hospital.persistence.DepartmentRepository;
 import com.solvd.hospital.persistence.HospitalRepository;
+import com.solvd.hospital.persistence.impl.DepartmentRepositoryImpl;
 import com.solvd.hospital.persistence.impl.HospitalRepositoryImpl;
 import com.solvd.hospital.service.HospitalService;
 
@@ -9,24 +11,36 @@ import java.util.List;
 import java.util.Optional;
 
 public class HospitalServiceImpl implements HospitalService {
+
     private final HospitalRepository hospitalRepository;
+    private final DepartmentRepository departmentRepository;
 
     public HospitalServiceImpl() {
-        this.hospitalRepository = new HospitalRepositoryImpl();
-    }
+        this(new HospitalRepositoryImpl(), new DepartmentRepositoryImpl());    }
 
-    public HospitalServiceImpl(HospitalRepository hospitalRepository) {
+    public HospitalServiceImpl(HospitalRepository hospitalRepository,DepartmentRepository departmentRepository) {
         this.hospitalRepository = hospitalRepository;
+        this.departmentRepository = departmentRepository;
     }
 
     @Override
     public Hospital save(Hospital hospital) {
-        return hospitalRepository.create(hospital);
+        Hospital createdHospital = hospitalRepository.create(hospital);
+        if (createdHospital.getDepartments() == null || createdHospital.getDepartments().isEmpty()) {
+            return createdHospital;
+        }
+
+        createdHospital.getDepartments().forEach(department -> {
+            department.setHospitalId(createdHospital.getId());
+            departmentRepository.create(department);
+        });
+        return createdHospital;
     }
 
     @Override
-    public Optional<Hospital> get(Long id) {
-        return hospitalRepository.findById(id);
+    public Hospital get(Long id) {
+        return hospitalRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("hspital not found: " + id));
     }
 
     @Override

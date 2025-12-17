@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class Insurance {
+
     private Long id;
     private Long insuranceTypeId;
     private String policyNumber;

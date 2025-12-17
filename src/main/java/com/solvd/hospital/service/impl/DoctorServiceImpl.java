@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class DoctorServiceImpl implements DoctorService {
+
     private final DoctorRepository doctorRepository;
 
     public DoctorServiceImpl() {
@@ -25,8 +26,9 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public Optional<Doctor> get(Long id) {
-        return doctorRepository.findById(id);
+    public Doctor get(Long id) {
+        return doctorRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Doctor not found: " + id));
     }
 
     @Override

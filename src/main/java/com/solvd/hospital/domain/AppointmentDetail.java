@@ -1,9 +1,17 @@
 package com.solvd.hospital.domain;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class AppointmentDetail {
+
+    private Long appointmentId;
+    private String appointmentStatus;
+    private String hospitalAddress;
+    private String doctorSpecialty;
+    private String doctorEmail;
+    private String patientPhone;
     private String hospitalName;
     private String departmentName;
     private String roomNumber;
@@ -15,6 +23,81 @@ public class AppointmentDetail {
     private String insurancePolicy;
     private String insuranceType;
     private BigDecimal billAmount;
+    private LocalDate admittedDate;
+    private LocalDate dischargeDate;
+    private String status;
+
+    public LocalDate getAdmittedDate() {
+        return admittedDate;
+    }
+
+    public void setAdmittedDate(LocalDate admittedDate) {
+        this.admittedDate = admittedDate;
+    }
+
+    public LocalDate getDischargeDate() {
+        return dischargeDate;
+    }
+
+    public void setDischargeDate(LocalDate dischargeDate) {
+        this.dischargeDate = dischargeDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Long getAppointmentId() {
+        return appointmentId;
+    }
+
+    public void setAppointmentId(Long appointmentId) {
+        this.appointmentId = appointmentId;
+    }
+
+    public String getAppointmentStatus() {
+        return appointmentStatus;
+    }
+
+    public void setAppointmentStatus(String appointmentStatus) {
+        this.appointmentStatus = appointmentStatus;
+    }
+
+    public String getHospitalAddress() {
+        return hospitalAddress;
+    }
+
+    public void setHospitalAddress(String hospitalAddress) {
+        this.hospitalAddress = hospitalAddress;
+    }
+
+    public String getDoctorSpecialty() {
+        return doctorSpecialty;
+    }
+
+    public void setDoctorSpecialty(String doctorSpecialty) {
+        this.doctorSpecialty = doctorSpecialty;
+    }
+
+    public String getDoctorEmail() {
+        return doctorEmail;
+    }
+
+    public void setDoctorEmail(String doctorEmail) {
+        this.doctorEmail = doctorEmail;
+    }
+
+    public String getPatientPhone() {
+        return patientPhone;
+    }
+
+    public void setPatientPhone(String patientPhone) {
+        this.patientPhone = patientPhone;
+    }
 
     public String getHospitalName() {
         return hospitalName;

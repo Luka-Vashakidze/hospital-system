@@ -15,6 +15,7 @@ import java.util.Objects;
 @XmlRootElement(name = "hospital")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Hospital {
+
     @XmlAttribute
     private Long id;
     private String name;

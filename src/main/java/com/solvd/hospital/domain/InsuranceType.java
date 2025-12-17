@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 public class InsuranceType {
+
     private Long id;
     private String name;
     private BigDecimal coveragePercentage;

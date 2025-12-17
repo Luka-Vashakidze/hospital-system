@@ -11,6 +11,7 @@ import java.util.Objects;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Appointment {
+
     @XmlAttribute
     private Long id;
     private Long departmentId;

@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class DepartmentServiceImpl implements DepartmentService {
+
     private final DepartmentRepository departmentRepository;
 
     public DepartmentServiceImpl() {
@@ -25,8 +26,9 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public Optional<Department> get(Long id) {
-        return departmentRepository.findById(id);
+    public Department get(Long id) {
+        return departmentRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Department not found: " + id));
     }
 
     @Override

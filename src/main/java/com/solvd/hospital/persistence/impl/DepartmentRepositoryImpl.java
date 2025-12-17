@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class DepartmentRepositoryImpl implements DepartmentRepository {
+
     private static final String INSERT_SQL = "INSERT INTO departments (hospital_id, code, name, description) VALUES (?, ?, ?, ?)";
     private static final String SELECT_BY_ID_SQL = "SELECT * FROM departments WHERE id = ?";
     private static final String SELECT_ALL_SQL = "SELECT * FROM departments";

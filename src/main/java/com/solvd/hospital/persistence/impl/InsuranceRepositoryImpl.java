@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class InsuranceRepositoryImpl implements InsuranceRepository {
+
     private static final String INSERT_SQL = "INSERT INTO insurances (insurance_type_id, policy_number, insured, expiry_date) VALUES (?, ?, ?, ?)";
     private static final String SELECT_BY_ID_SQL = "SELECT * FROM insurances WHERE id = ?";
     private static final String SELECT_ALL_SQL = "SELECT * FROM insurances";

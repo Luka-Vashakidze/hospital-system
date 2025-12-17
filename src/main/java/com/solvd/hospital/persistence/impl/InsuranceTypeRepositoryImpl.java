@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class InsuranceTypeRepositoryImpl implements InsuranceTypeRepository {
+
     private static final String INSERT_SQL = "INSERT INTO insurance_types (name, coverage_percentage, description) VALUES (?, ?, ?)";
     private static final String SELECT_BY_ID_SQL = "SELECT * FROM insurance_types WHERE id = ?";
     private static final String SELECT_ALL_SQL = "SELECT * FROM insurance_types";

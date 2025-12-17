@@ -7,6 +7,7 @@ import jakarta.xml.bind.annotation.XmlElement;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Prescription {
+
     @XmlAttribute
     private Long id;
     @XmlElement

@@ -12,6 +12,7 @@ import java.util.Objects;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Department {
+
     @XmlAttribute
     private Long id;
     private Long hospitalId;

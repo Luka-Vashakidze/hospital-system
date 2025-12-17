@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class RoomServiceImpl implements RoomService {
+
     private final RoomRepository roomRepository;
 
     public RoomServiceImpl() {
@@ -25,8 +26,9 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public Optional<Room> get(Long id) {
-        return roomRepository.findById(id);
+    public Room get(Long id) {
+        return roomRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Room not found: " + id));
     }
 
     @Override

@@ -6,9 +6,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface InsuranceTypeService {
+
     InsuranceType save(InsuranceType insuranceType);
 
-    Optional<InsuranceType> get(Long id);
+    InsuranceType get(Long id);
 
     List<InsuranceType> getAll();
 

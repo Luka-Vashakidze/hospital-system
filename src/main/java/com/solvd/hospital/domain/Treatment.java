@@ -11,6 +11,7 @@ import java.util.List;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Treatment {
+
     @XmlAttribute
     private Long id;
     @XmlElement

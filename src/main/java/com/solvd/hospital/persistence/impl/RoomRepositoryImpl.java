@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class RoomRepositoryImpl implements RoomRepository {
+
     private static final String INSERT_SQL = "INSERT INTO rooms (department_id, number, is_available) VALUES (?, ?, ?)";
     private static final String SELECT_BY_ID_SQL = "SELECT * FROM rooms WHERE id = ?";
     private static final String SELECT_ALL_SQL = "SELECT * FROM rooms";

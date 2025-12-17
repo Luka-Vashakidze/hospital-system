@@ -13,6 +13,7 @@ import java.util.Objects;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Patient {
+
     @XmlAttribute
     private Long id;
     private String fullName;

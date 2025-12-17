@@ -9,6 +9,7 @@ import java.time.LocalDate;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Admission {
+
     @XmlAttribute
     private Long id;
     @XmlElement

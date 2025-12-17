@@ -9,6 +9,7 @@ import java.util.Objects;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Room {
+
     @XmlAttribute
     private Long id;
     private Long departmentId;

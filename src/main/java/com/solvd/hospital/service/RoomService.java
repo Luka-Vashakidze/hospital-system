@@ -6,9 +6,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface RoomService {
+
     Room save(Room room);
 
-    Optional<Room> get(Long id);
+    Room get(Long id);
 
     List<Room> getAll();
 

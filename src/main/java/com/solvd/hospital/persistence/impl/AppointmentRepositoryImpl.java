@@ -5,18 +5,14 @@ import com.solvd.hospital.domain.AppointmentDetail;
 import com.solvd.hospital.persistence.AppointmentRepository;
 import com.solvd.hospital.persistence.connection.ConnectionPool;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class AppointmentRepositoryImpl implements AppointmentRepository {
+
     private static final String INSERT_SQL = "INSERT INTO appointments (department_id, doctor_id, patient_id, date_time, status, bill_amount) VALUES (?, ?, ?, ?, ?, ?)";
     private static final String SELECT_BY_ID_SQL = "SELECT * FROM appointments WHERE id = ?";
     private static final String SELECT_ALL_SQL = "SELECT * FROM appointments";
@@ -25,9 +21,13 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
     private static final String UPDATE_SQL = "UPDATE appointments SET department_id = ?, doctor_id = ?, patient_id = ?, date_time = ?, status = ?, bill_amount = ? WHERE id = ?";
     private static final String DELETE_SQL = "DELETE FROM appointments WHERE id = ?";
     private static final String SELECT_WITH_JOINS_SQL = """
-            SELECT h.name AS hospital_name, d.name AS department_name, r.number AS room_number, doc.full_name AS doctor_name,
-                   p.full_name AS patient_name, appt.date_time, tr.diagnosis, pr.medication, ins.policy_number,
-                   it.name AS insurance_type, appt.bill_amount
+            SELECT appt.id AS appointment_id, appt.status AS appointment_status, appt.bill_amount,
+                               h.name AS hospital_name, h.address AS hospital_address,
+                               d.name AS department_name, r.number AS room_number,
+                               doc.full_name AS doctor_name, doc.specialty AS doctor_specialty, doc.email AS doctor_email,
+                               p.full_name AS patient_name, p.phone AS patient_phone,
+                               appt.date_time, tr.diagnosis, pr.medication, ins.policy_number,
+                               it.name AS insurance_type
             FROM appointments appt
             JOIN departments d ON appt.department_id = d.id
             JOIN hospitals h ON d.hospital_id = h.id
@@ -190,6 +190,12 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
 
     private AppointmentDetail mapAppointmentDetail(ResultSet resultSet) throws SQLException {
         AppointmentDetail detail = new AppointmentDetail();
+        detail.setAppointmentId(resultSet.getLong("appointment_id"));
+        detail.setAppointmentStatus(resultSet.getString("appointment_status"));
+        detail.setHospitalAddress(resultSet.getString("hospital_address"));
+        detail.setDoctorSpecialty(resultSet.getString("doctor_specialty"));
+        detail.setDoctorEmail(resultSet.getString("doctor_email"));
+        detail.setPatientPhone(resultSet.getString("patient_phone"));
         detail.setHospitalName(resultSet.getString("hospital_name"));
         detail.setDepartmentName(resultSet.getString("department_name"));
         detail.setRoomNumber(resultSet.getString("room_number"));
@@ -201,6 +207,18 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
         detail.setInsurancePolicy(resultSet.getString("policy_number"));
         detail.setInsuranceType(resultSet.getString("insurance_type"));
         detail.setBillAmount(resultSet.getBigDecimal("bill_amount"));
+
+        Date admDate = resultSet.getDate("admitted_date");
+        if (admDate != null) {
+            detail.setAdmittedDate(admDate.toLocalDate());
+        }
+
+        Date disDate = resultSet.getDate("discharge_date");
+        if (disDate != null) {
+            detail.setDischargeDate(disDate.toLocalDate());
+        }
+
+        detail.setRoomNumber(resultSet.getString("department_room"));
         return detail;
     }
 
