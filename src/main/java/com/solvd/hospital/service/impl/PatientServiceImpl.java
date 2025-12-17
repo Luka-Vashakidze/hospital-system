@@ -6,9 +6,9 @@ import com.solvd.hospital.persistence.impl.PatientRepositoryImpl;
 import com.solvd.hospital.service.PatientService;
 
 import java.util.List;
-import java.util.Optional;
 
 public class PatientServiceImpl implements PatientService {
+
     private final PatientRepository patientRepository;
 
     public PatientServiceImpl() {
@@ -25,8 +25,9 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public Optional<Patient> get(Long id) {
-        return patientRepository.findById(id);
+    public Patient get(Long id) {
+        return patientRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Patient not found: " + id));
     }
 
     @Override

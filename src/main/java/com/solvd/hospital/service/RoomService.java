@@ -3,12 +3,12 @@ package com.solvd.hospital.service;
 import com.solvd.hospital.domain.Room;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface RoomService {
+
     Room save(Room room);
 
-    Optional<Room> get(Long id);
+    Room get(Long id);
 
     List<Room> getAll();
 
@@ -18,4 +18,3 @@ public interface RoomService {
 
     boolean remove(Long id);
 }
-

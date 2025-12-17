@@ -6,9 +6,9 @@ import com.solvd.hospital.persistence.impl.InsuranceTypeRepositoryImpl;
 import com.solvd.hospital.service.InsuranceTypeService;
 
 import java.util.List;
-import java.util.Optional;
 
 public class InsuranceTypeServiceImpl implements InsuranceTypeService {
+
     private final InsuranceTypeRepository insuranceTypeRepository;
 
     public InsuranceTypeServiceImpl() {
@@ -25,8 +25,9 @@ public class InsuranceTypeServiceImpl implements InsuranceTypeService {
     }
 
     @Override
-    public Optional<InsuranceType> get(Long id) {
-        return insuranceTypeRepository.findById(id);
+    public InsuranceType get(Long id) {
+        return insuranceTypeRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Insurance type not found: " + id));
     }
 
     @Override
@@ -44,4 +45,3 @@ public class InsuranceTypeServiceImpl implements InsuranceTypeService {
         return insuranceTypeRepository.deleteById(id);
     }
 }
-

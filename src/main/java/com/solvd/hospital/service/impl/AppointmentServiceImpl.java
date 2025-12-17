@@ -8,9 +8,9 @@ import com.solvd.hospital.service.AppointmentService;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 public class AppointmentServiceImpl implements AppointmentService {
+
     private final AppointmentRepository appointmentRepository;
 
     public AppointmentServiceImpl() {
@@ -27,8 +27,9 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public Optional<Appointment> get(Long id) {
-        return appointmentRepository.findById(id);
+    public Appointment get(Long id) {
+        return appointmentRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Appointment not found: " + id));
     }
 
     @Override

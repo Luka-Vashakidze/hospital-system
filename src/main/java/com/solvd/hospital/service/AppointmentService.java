@@ -5,12 +5,12 @@ import com.solvd.hospital.domain.AppointmentDetail;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 public interface AppointmentService {
+
     Appointment save(Appointment appointment);
 
-    Optional<Appointment> get(Long id);
+    Appointment get(Long id);
 
     List<Appointment> getAll();
 

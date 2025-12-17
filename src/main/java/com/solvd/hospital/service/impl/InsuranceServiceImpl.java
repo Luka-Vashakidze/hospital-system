@@ -6,9 +6,9 @@ import com.solvd.hospital.persistence.impl.InsuranceRepositoryImpl;
 import com.solvd.hospital.service.InsuranceService;
 
 import java.util.List;
-import java.util.Optional;
 
 public class InsuranceServiceImpl implements InsuranceService {
+
     private final InsuranceRepository insuranceRepository;
 
     public InsuranceServiceImpl() {
@@ -25,8 +25,9 @@ public class InsuranceServiceImpl implements InsuranceService {
     }
 
     @Override
-    public Optional<Insurance> get(Long id) {
-        return insuranceRepository.findById(id);
+    public Insurance get(Long id) {
+        return insuranceRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Insurance not found: " + id));
     }
 
     @Override
@@ -49,4 +50,3 @@ public class InsuranceServiceImpl implements InsuranceService {
         return insuranceRepository.deleteById(id);
     }
 }
-
