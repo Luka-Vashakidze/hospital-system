@@ -54,10 +54,9 @@ public class Main {
                 new AppointmentServiceImpl()
         );
         System.out.println("MVC task completed: " + controller.getClass().getSimpleName()
-                + " is ready with JDBC backed services.");
+                + " is ready with MyBatis-backed services.");
     }
 }
-
 
 
 

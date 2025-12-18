@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.solvd.hospital.persistence.mybatis.InsuranceMapper">
+
+    <resultMap id="InsuranceResultMap" type="Insurance">
+        <id column="id" property="id"/>
+        <result column="insurance_type_id" property="insuranceTypeId"/>
+        <result column="policy_number" property="policyNumber"/>
+        <result column="insured" property="insured"/>
+        <result column="expiry_date" property="expiryDate"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="Insurance" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO insurances (insurance_type_id, policy_number, insured, expiry_date)
+        VALUES (#{insuranceTypeId}, #{policyNumber}, #{insured}, #{expiryDate})
+    </insert>
+
+    <select id="selectById" parameterType="long" resultMap="InsuranceResultMap">
+        SELECT id, insurance_type_id, policy_number, insured, expiry_date
+        FROM insurances
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectAll" resultMap="InsuranceResultMap">
+        SELECT id, insurance_type_id, policy_number, insured, expiry_date
+        FROM insurances
+    </select>
+
+    <select id="selectExpiringPolicies" resultMap="InsuranceResultMap">
+        SELECT id, insurance_type_id, policy_number, insured, expiry_date
+        FROM insurances
+        WHERE expiry_date <= CURRENT_DATE
+    </select>
+
+    <update id="update" parameterType="Insurance">
+        UPDATE insurances
+        SET insurance_type_id = #{insuranceTypeId},
+            policy_number = #{policyNumber},
+            insured = #{insured},
+            expiry_date = #{expiryDate}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="long">
+        DELETE FROM insurances WHERE id = #{id}
+    </delete>
+
+</mapper>

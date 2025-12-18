@@ -2,7 +2,7 @@ package com.solvd.hospital.service.impl;
 
 import com.solvd.hospital.domain.Room;
 import com.solvd.hospital.persistence.RoomRepository;
-import com.solvd.hospital.persistence.impl.RoomRepositoryImpl;
+import com.solvd.hospital.persistence.mybatis.impl.RoomRepositoryMyBatisImpl;
 import com.solvd.hospital.service.RoomService;
 
 import java.util.List;
@@ -13,7 +13,7 @@ public class RoomServiceImpl implements RoomService {
     private final RoomRepository roomRepository;
 
     public RoomServiceImpl() {
-        this.roomRepository = new RoomRepositoryImpl();
+        this.roomRepository = new RoomRepositoryMyBatisImpl();
     }
 
     public RoomServiceImpl(RoomRepository roomRepository) {
@@ -51,4 +51,3 @@ public class RoomServiceImpl implements RoomService {
         return roomRepository.deleteById(id);
     }
 }
-

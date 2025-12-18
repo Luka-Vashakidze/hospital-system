@@ -2,7 +2,7 @@ package com.solvd.hospital.service.impl;
 
 import com.solvd.hospital.domain.InsuranceType;
 import com.solvd.hospital.persistence.InsuranceTypeRepository;
-import com.solvd.hospital.persistence.impl.InsuranceTypeRepositoryImpl;
+import com.solvd.hospital.persistence.mybatis.impl.InsuranceTypeRepositoryMyBatisImpl;
 import com.solvd.hospital.service.InsuranceTypeService;
 
 import java.util.List;
@@ -13,7 +13,7 @@ public class InsuranceTypeServiceImpl implements InsuranceTypeService {
     private final InsuranceTypeRepository insuranceTypeRepository;
 
     public InsuranceTypeServiceImpl() {
-        this.insuranceTypeRepository = new InsuranceTypeRepositoryImpl();
+        this.insuranceTypeRepository = new InsuranceTypeRepositoryMyBatisImpl();
     }
 
     public InsuranceTypeServiceImpl(InsuranceTypeRepository insuranceTypeRepository) {
@@ -46,4 +46,3 @@ public class InsuranceTypeServiceImpl implements InsuranceTypeService {
         return insuranceTypeRepository.deleteById(id);
     }
 }
-

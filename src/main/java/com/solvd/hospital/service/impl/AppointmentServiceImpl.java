@@ -3,7 +3,7 @@ package com.solvd.hospital.service.impl;
 import com.solvd.hospital.domain.Appointment;
 import com.solvd.hospital.domain.AppointmentDetail;
 import com.solvd.hospital.persistence.AppointmentRepository;
-import com.solvd.hospital.persistence.impl.AppointmentRepositoryImpl;
+import com.solvd.hospital.persistence.mybatis.impl.AppointmentRepositoryMyBatisImpl;
 import com.solvd.hospital.service.AppointmentService;
 
 import java.time.LocalDateTime;
@@ -15,7 +15,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     private final AppointmentRepository appointmentRepository;
 
     public AppointmentServiceImpl() {
-        this.appointmentRepository = new AppointmentRepositoryImpl();
+        this.appointmentRepository = new AppointmentRepositoryMyBatisImpl();
     }
 
     public AppointmentServiceImpl(AppointmentRepository appointmentRepository) {

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <properties resource="database.properties"/>
+
+    <typeAliases>
+        <typeAlias alias="Hospital" type="com.solvd.hospital.domain.Hospital"/>
+        <typeAlias alias="Department" type="com.solvd.hospital.domain.Department"/>
+        <typeAlias alias="Doctor" type="com.solvd.hospital.domain.Doctor"/>
+        <typeAlias alias="Patient" type="com.solvd.hospital.domain.Patient"/>
+        <typeAlias alias="Room" type="com.solvd.hospital.domain.Room"/>
+        <typeAlias alias="Insurance" type="com.solvd.hospital.domain.Insurance"/>
+        <typeAlias alias="InsuranceType" type="com.solvd.hospital.domain.InsuranceType"/>
+        <typeAlias alias="Appointment" type="com.solvd.hospital.domain.Appointment"/>
+        <typeAlias alias="AppointmentDetail" type="com.solvd.hospital.domain.AppointmentDetail"/>
+    </typeAliases>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <mapper resource="mappers/HospitalMapper.xml"/>
+        <mapper resource="mappers/DepartmentMapper.xml"/>
+        <mapper resource="mappers/DoctorMapper.xml"/>
+        <mapper resource="mappers/PatientMapper.xml"/>
+        <mapper resource="mappers/RoomMapper.xml"/>
+        <mapper resource="mappers/InsuranceMapper.xml"/>
+        <mapper resource="mappers/InsuranceTypeMapper.xml"/>
+        <mapper resource="mappers/AppointmentMapper.xml"/>
+    </mappers>
+</configuration>

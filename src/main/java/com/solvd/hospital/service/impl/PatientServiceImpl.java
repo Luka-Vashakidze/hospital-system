@@ -2,7 +2,7 @@ package com.solvd.hospital.service.impl;
 
 import com.solvd.hospital.domain.Patient;
 import com.solvd.hospital.persistence.PatientRepository;
-import com.solvd.hospital.persistence.impl.PatientRepositoryImpl;
+import com.solvd.hospital.persistence.mybatis.impl.PatientRepositoryMyBatisImpl;
 import com.solvd.hospital.service.PatientService;
 
 import java.util.List;
@@ -13,7 +13,7 @@ public class PatientServiceImpl implements PatientService {
     private final PatientRepository patientRepository;
 
     public PatientServiceImpl() {
-        this.patientRepository = new PatientRepositoryImpl();
+        this.patientRepository = new PatientRepositoryMyBatisImpl();
     }
 
     public PatientServiceImpl(PatientRepository patientRepository) {

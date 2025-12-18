@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.solvd.hospital.persistence.mybatis.RoomMapper">
+
+    <resultMap id="RoomResultMap" type="Room">
+        <id column="id" property="id"/>
+        <result column="department_id" property="departmentId"/>
+        <result column="number" property="number"/>
+        <result column="capacity" property="capacity"/>
+        <result column="is_available" property="available"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="Room" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO rooms (department_id, number, capacity, is_available)
+        VALUES (#{departmentId}, #{number}, #{capacity}, #{available})
+    </insert>
+
+    <select id="selectById" parameterType="long" resultMap="RoomResultMap">
+        SELECT id, department_id, number, capacity, is_available
+        FROM rooms
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectAll" resultMap="RoomResultMap">
+        SELECT id, department_id, number, capacity, is_available
+        FROM rooms
+    </select>
+
+    <select id="selectByDepartment" parameterType="long" resultMap="RoomResultMap">
+        SELECT id, department_id, number, capacity, is_available
+        FROM rooms
+        WHERE department_id = #{departmentId}
+    </select>
+
+    <update id="update" parameterType="Room">
+        UPDATE rooms
+        SET department_id = #{departmentId},
+            number = #{number},
+            capacity = #{capacity},
+            is_available = #{available}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="long">
+        DELETE FROM rooms WHERE id = #{id}
+    </delete>
+
+</mapper>
