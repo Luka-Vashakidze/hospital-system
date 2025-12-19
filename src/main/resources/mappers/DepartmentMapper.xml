@@ -4,9 +4,9 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.solvd.hospital.persistence.mybatis.DepartmentMapper">
 
-    <resultMap id="DepartmentResultMap" type="Department">
+    <resultMap id="DepartmentResultMap" type="Department" autoMapping="false">
         <id column="id" property="id"/>
-        <result column="hospital_id" property="hospitalId"/>
+        <result column="hospitalId" property="hospitalId"/>
         <result column="code" property="code"/>
         <result column="name" property="name"/>
         <result column="description" property="description"/>
@@ -18,18 +18,30 @@
     </insert>
 
     <select id="selectById" parameterType="long" resultMap="DepartmentResultMap">
-        SELECT id, hospital_id, code, name, description
+        SELECT id,
+               hospital_id AS hospitalId,
+               code,
+               name,
+               description
         FROM departments
         WHERE id = #{id}
     </select>
 
     <select id="selectAll" resultMap="DepartmentResultMap">
-        SELECT id, hospital_id, code, name, description
+        SELECT id,
+               hospital_id AS hospitalId,
+               code,
+               name,
+               description
         FROM departments
     </select>
 
     <select id="selectByHospitalId" parameterType="long" resultMap="DepartmentResultMap">
-        SELECT id, hospital_id, code, name, description
+        SELECT id,
+               hospital_id AS hospitalId,
+               code,
+               name,
+               description
         FROM departments
         WHERE hospital_id = #{hospitalId}
     </select>

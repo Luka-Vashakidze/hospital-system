@@ -4,37 +4,37 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.solvd.hospital.persistence.mybatis.AppointmentMapper">
 
-    <resultMap id="AppointmentResultMap" type="Appointment">
+    <resultMap id="AppointmentResultMap" type="Appointment" autoMapping="false">
         <id column="id" property="id"/>
-        <result column="department_id" property="departmentId"/>
-        <result column="doctor_id" property="doctorId"/>
-        <result column="patient_id" property="patientId"/>
-        <result column="date_time" property="dateTime"/>
+        <result column="departmentId" property="departmentId"/>
+        <result column="doctorId" property="doctorId"/>
+        <result column="patientId" property="patientId"/>
+        <result column="dateTime" property="dateTime"/>
         <result column="purpose" property="purpose"/>
         <result column="status" property="status"/>
-        <result column="bill_amount" property="billAmount"/>
+        <result column="billAmount" property="billAmount"/>
     </resultMap>
 
-    <resultMap id="AppointmentDetailResultMap" type="AppointmentDetail">
-        <id column="appointment_id" property="appointmentId"/>
-        <result column="appointment_status" property="appointmentStatus"/>
-        <result column="hospital_address" property="hospitalAddress"/>
-        <result column="doctor_specialty" property="doctorSpecialty"/>
-        <result column="doctor_email" property="doctorEmail"/>
-        <result column="patient_phone" property="patientPhone"/>
-        <result column="hospital_name" property="hospitalName"/>
-        <result column="department_name" property="departmentName"/>
-        <result column="room_number" property="roomNumber"/>
-        <result column="doctor_name" property="doctorName"/>
-        <result column="patient_name" property="patientName"/>
-        <result column="date_time" property="appointmentTime"/>
+    <resultMap id="AppointmentDetailResultMap" type="AppointmentDetail" autoMapping="false">
+        <id column="appointmentId" property="appointmentId"/>
+        <result column="appointmentStatus" property="appointmentStatus"/>
+        <result column="hospitalAddress" property="hospitalAddress"/>
+        <result column="doctorSpecialty" property="doctorSpecialty"/>
+        <result column="doctorEmail" property="doctorEmail"/>
+        <result column="patientPhone" property="patientPhone"/>
+        <result column="hospitalName" property="hospitalName"/>
+        <result column="departmentName" property="departmentName"/>
+        <result column="roomNumber" property="roomNumber"/>
+        <result column="doctorName" property="doctorName"/>
+        <result column="patientName" property="patientName"/>
+        <result column="appointmentTime" property="appointmentTime"/>
         <result column="diagnosis" property="diagnosis"/>
         <result column="medication" property="medication"/>
-        <result column="policy_number" property="insurancePolicy"/>
-        <result column="insurance_type" property="insuranceType"/>
-        <result column="bill_amount" property="billAmount"/>
-        <result column="admitted_date" property="admittedDate"/>
-        <result column="discharge_date" property="dischargeDate"/>
+        <result column="insurancePolicy" property="insurancePolicy"/>
+        <result column="insuranceType" property="insuranceType"/>
+        <result column="billAmount" property="billAmount"/>
+        <result column="admittedDate" property="admittedDate"/>
+        <result column="dischargeDate" property="dischargeDate"/>
         <result column="status" property="status"/>
     </resultMap>
 
@@ -44,49 +44,77 @@
     </insert>
 
     <select id="selectById" parameterType="long" resultMap="AppointmentResultMap">
-        SELECT id, department_id, doctor_id, patient_id, date_time, purpose, status, bill_amount
+        SELECT id,
+               department_id AS departmentId,
+               doctor_id AS doctorId,
+               patient_id AS patientId,
+               date_time AS dateTime,
+               purpose,
+               status,
+               bill_amount AS billAmount
         FROM appointments
         WHERE id = #{id}
     </select>
 
     <select id="selectAll" resultMap="AppointmentResultMap">
-        SELECT id, department_id, doctor_id, patient_id, date_time, purpose, status, bill_amount
+        SELECT id,
+               department_id AS departmentId,
+               doctor_id AS doctorId,
+               patient_id AS patientId,
+               date_time AS dateTime,
+               purpose,
+               status,
+               bill_amount AS billAmount
         FROM appointments
     </select>
 
     <select id="selectByDoctor" parameterType="long" resultMap="AppointmentResultMap">
-        SELECT id, department_id, doctor_id, patient_id, date_time, purpose, status, bill_amount
+        SELECT id,
+               department_id AS departmentId,
+               doctor_id AS doctorId,
+               patient_id AS patientId,
+               date_time AS dateTime,
+               purpose,
+               status,
+               bill_amount AS billAmount
         FROM appointments
         WHERE doctor_id = #{doctorId}
     </select>
 
     <select id="selectByPatient" parameterType="long" resultMap="AppointmentResultMap">
-        SELECT id, department_id, doctor_id, patient_id, date_time, purpose, status, bill_amount
+        SELECT id,
+               department_id AS departmentId,
+               doctor_id AS doctorId,
+               patient_id AS patientId,
+               date_time AS dateTime,
+               purpose,
+               status,
+               bill_amount AS billAmount
         FROM appointments
         WHERE patient_id = #{patientId}
     </select>
 
     <select id="selectUpcomingDetails" parameterType="map" resultMap="AppointmentDetailResultMap">
-        SELECT appt.id AS appointment_id,
-               appt.status AS appointment_status,
-               appt.bill_amount,
-               h.name AS hospital_name,
-               h.address AS hospital_address,
-               d.name AS department_name,
-               r.number AS room_number,
-               doc.full_name AS doctor_name,
-               doc.specialty AS doctor_specialty,
-               doc.email AS doctor_email,
-               p.full_name AS patient_name,
-               p.phone AS patient_phone,
-               appt.date_time,
-               tr.diagnosis,
-               pr.medication,
-               ins.policy_number,
-               it.name AS insurance_type,
-               adm.admitted_date,
-               adm.discharge_date,
-               adm.status
+        SELECT appt.id AS appointmentId,
+               appt.status AS appointmentStatus,
+               appt.bill_amount AS billAmount,
+               h.name AS hospitalName,
+               h.address AS hospitalAddress,
+               d.name AS departmentName,
+               r.number AS roomNumber,
+               doc.full_name AS doctorName,
+               doc.specialty AS doctorSpecialty,
+               doc.email AS doctorEmail,
+               p.full_name AS patientName,
+               p.phone AS patientPhone,
+               appt.date_time AS appointmentTime,
+               tr.diagnosis AS diagnosis,
+               pr.medication AS medication,
+               ins.policy_number AS insurancePolicy,
+               it.name AS insuranceType,
+               adm.admitted_date AS admittedDate,
+               adm.discharge_date AS dischargeDate,
+               adm.status AS status
         FROM appointments appt
                  JOIN departments d ON appt.department_id = d.id
                  JOIN hospitals h ON d.hospital_id = h.id

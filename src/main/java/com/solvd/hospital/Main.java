@@ -2,6 +2,18 @@ package com.solvd.hospital;
 
 import com.solvd.hospital.controller.HospitalController;
 import com.solvd.hospital.domain.Hospital;
+import com.solvd.hospital.patterns.facade.HospitalFacade;
+import com.solvd.hospital.patterns.factory.RepositoryFactory;
+import com.solvd.hospital.patterns.factory.ServiceFactory;
+import com.solvd.hospital.patterns.factory.impl.MyBatisRepositoryFactory;
+import com.solvd.hospital.patterns.factory.impl.MyBatisServiceFactory;
+import com.solvd.hospital.patterns.listener.AppointmentEventPublisher;
+import com.solvd.hospital.patterns.notification.BasicNotificationService;
+import com.solvd.hospital.patterns.notification.LoggingNotificationDecorator;
+import com.solvd.hospital.patterns.notification.NotificationService;
+import com.solvd.hospital.patterns.strategy.BillingStrategy;
+import com.solvd.hospital.patterns.strategy.InsuranceBillingStrategy;
+import com.solvd.hospital.patterns.strategy.StandardBillingStrategy;
 import com.solvd.hospital.service.parser.StaxHospitalParser;
 import com.solvd.hospital.service.parser.jaxb.JaxbHospital;
 import com.solvd.hospital.service.parser.json.JacksonHospital;
@@ -12,6 +24,7 @@ import com.solvd.hospital.service.impl.HospitalServiceImpl;
 import com.solvd.hospital.service.impl.PatientServiceImpl;
 
 import java.io.InputStream;
+import java.math.BigDecimal;
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -55,9 +68,23 @@ public class Main {
         );
         System.out.println("MVC task completed: " + controller.getClass().getSimpleName()
                 + " is ready with MyBatis-backed services.");
+
+        RepositoryFactory repositoryFactory = new MyBatisRepositoryFactory();
+        ServiceFactory serviceFactory = new MyBatisServiceFactory(repositoryFactory);
+        AppointmentEventPublisher eventPublisher = new AppointmentEventPublisher();
+        NotificationService notificationService = new LoggingNotificationDecorator(new BasicNotificationService());
+        BillingStrategy billingStrategy = new InsuranceBillingStrategy(new BigDecimal("0.90"));
+        HospitalFacade facade = new HospitalFacade(
+                serviceFactory,
+                billingStrategy,
+                eventPublisher,
+                notificationService,
+                true
+        );
+        System.out.println("Facade pattern initialized: " + facade.getClass().getSimpleName()
+                + " wires services, strategies, listeners, and proxy decorators.");
     }
 }
-
 
 
 

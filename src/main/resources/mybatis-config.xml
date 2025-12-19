@@ -5,6 +5,10 @@
 <configuration>
     <properties resource="database.properties"/>
 
+    <settings>
+        <setting name="autoMappingBehavior" value="NONE"/>
+    </settings>
+
     <typeAliases>
         <typeAlias alias="Hospital" type="com.solvd.hospital.domain.Hospital"/>
         <typeAlias alias="Department" type="com.solvd.hospital.domain.Department"/>
