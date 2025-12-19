@@ -3,9 +3,10 @@ package com.solvd.hospital.service.impl;
 import com.solvd.hospital.domain.Hospital;
 import com.solvd.hospital.persistence.DepartmentRepository;
 import com.solvd.hospital.persistence.HospitalRepository;
-import com.solvd.hospital.persistence.impl.DepartmentRepositoryImpl;
-import com.solvd.hospital.persistence.impl.HospitalRepositoryImpl;
+import com.solvd.hospital.persistence.mybatis.impl.HospitalRepositoryMyBatisImpl;
 import com.solvd.hospital.service.HospitalService;
+import com.solvd.hospital.service.DepartmentService;
+import com.solvd.hospital.service.impl.DepartmentServiceImpl;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,14 +14,15 @@ import java.util.Optional;
 public class HospitalServiceImpl implements HospitalService {
 
     private final HospitalRepository hospitalRepository;
-    private final DepartmentRepository departmentRepository;
+    private final DepartmentService departmentService;
 
     public HospitalServiceImpl() {
-        this(new HospitalRepositoryImpl(), new DepartmentRepositoryImpl());    }
+        this(new HospitalRepositoryMyBatisImpl(), new DepartmentServiceImpl());
+}
 
-    public HospitalServiceImpl(HospitalRepository hospitalRepository,DepartmentRepository departmentRepository) {
+    public HospitalServiceImpl(HospitalRepository hospitalRepository, DepartmentService departmentService) {
         this.hospitalRepository = hospitalRepository;
-        this.departmentRepository = departmentRepository;
+        this.departmentService = departmentService;
     }
 
     @Override
@@ -32,7 +34,7 @@ public class HospitalServiceImpl implements HospitalService {
 
         createdHospital.getDepartments().forEach(department -> {
             department.setHospitalId(createdHospital.getId());
-            departmentRepository.create(department);
+            departmentService.save(department);
         });
         return createdHospital;
     }

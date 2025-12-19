@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.solvd.hospital.persistence.mybatis.HospitalMapper">
+
+    <resultMap id="HospitalResultMap" type="Hospital" autoMapping="false">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="address" property="address"/>
+        <result column="phone" property="phone"/>
+        <result column="email" property="email"/>
+        <result column="createdAt" property="createdAt"/>
+        <result column="updatedAt" property="updatedAt"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="Hospital" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO hospitals (name, address, phone, email, created_at, updated_at)
+        VALUES (#{name}, #{address}, #{phone}, #{email}, #{createdAt}, #{updatedAt})
+    </insert>
+
+    <select id="selectById" parameterType="long" resultMap="HospitalResultMap">
+        SELECT id,
+               name,
+               address,
+               phone,
+               email,
+               created_at AS createdAt,
+               updated_at AS updatedAt
+        FROM hospitals
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectAll" resultMap="HospitalResultMap">
+        SELECT id,
+               name,
+               address,
+               phone,
+               email,
+               created_at AS createdAt,
+               updated_at AS updatedAt
+        FROM hospitals
+    </select>
+
+    <update id="update" parameterType="Hospital">
+        UPDATE hospitals
+        SET name = #{name},
+            address = #{address},
+            phone = #{phone},
+            email = #{email},
+            updated_at = #{updatedAt}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="long">
+        DELETE FROM hospitals WHERE id = #{id}
+    </delete>
+
+</mapper>

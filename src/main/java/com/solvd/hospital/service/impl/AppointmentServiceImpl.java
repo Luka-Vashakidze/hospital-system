@@ -3,28 +3,43 @@ package com.solvd.hospital.service.impl;
 import com.solvd.hospital.domain.Appointment;
 import com.solvd.hospital.domain.AppointmentDetail;
 import com.solvd.hospital.persistence.AppointmentRepository;
-import com.solvd.hospital.persistence.impl.AppointmentRepositoryImpl;
+import com.solvd.hospital.persistence.mybatis.impl.AppointmentRepositoryMyBatisImpl;
+import com.solvd.hospital.patterns.listener.AppointmentEventPublisher;
+import com.solvd.hospital.patterns.strategy.BillingStrategy;
+import com.solvd.hospital.patterns.strategy.StandardBillingStrategy;
 import com.solvd.hospital.service.AppointmentService;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 public class AppointmentServiceImpl implements AppointmentService {
 
     private final AppointmentRepository appointmentRepository;
+    private final BillingStrategy billingStrategy;
+    private final AppointmentEventPublisher appointmentEventPublisher;
 
     public AppointmentServiceImpl() {
-        this.appointmentRepository = new AppointmentRepositoryImpl();
+        this(new AppointmentRepositoryMyBatisImpl(), new StandardBillingStrategy(), new AppointmentEventPublisher());
     }
 
     public AppointmentServiceImpl(AppointmentRepository appointmentRepository) {
+        this(appointmentRepository, new StandardBillingStrategy(), new AppointmentEventPublisher());
+    }
+
+    public AppointmentServiceImpl(AppointmentRepository appointmentRepository,
+                                  BillingStrategy billingStrategy,
+                                  AppointmentEventPublisher appointmentEventPublisher) {
         this.appointmentRepository = appointmentRepository;
+        this.billingStrategy = billingStrategy;
+        this.appointmentEventPublisher = appointmentEventPublisher;
     }
 
     @Override
     public Appointment save(Appointment appointment) {
-        return appointmentRepository.create(appointment);
+        appointment.setBillAmount(billingStrategy.calculate(appointment));
+        Appointment created = appointmentRepository.create(appointment);
+        appointmentEventPublisher.publishCreated(created);
+        return created;
     }
 
     @Override

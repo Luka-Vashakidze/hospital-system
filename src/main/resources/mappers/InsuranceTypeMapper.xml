@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.solvd.hospital.persistence.mybatis.InsuranceTypeMapper">
+
+    <resultMap id="InsuranceTypeResultMap" type="InsuranceType" autoMapping="false">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="coveragePercentage" property="coveragePercentage"/>
+        <result column="description" property="description"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="InsuranceType" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO insurance_types (name, coverage_percentage, description)
+        VALUES (#{name}, #{coveragePercentage}, #{description})
+    </insert>
+
+    <select id="selectById" parameterType="long" resultMap="InsuranceTypeResultMap">
+        SELECT id,
+               name,
+               coverage_percentage AS coveragePercentage,
+               description
+        FROM insurance_types
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectAll" resultMap="InsuranceTypeResultMap">
+        SELECT id,
+               name,
+               coverage_percentage AS coveragePercentage,
+               description
+        FROM insurance_types
+    </select>
+
+    <update id="update" parameterType="InsuranceType">
+        UPDATE insurance_types
+        SET name = #{name},
+            coverage_percentage = #{coveragePercentage},
+            description = #{description}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="long">
+        DELETE FROM insurance_types WHERE id = #{id}
+    </delete>
+
+</mapper>

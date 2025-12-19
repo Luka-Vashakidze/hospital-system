@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.solvd.hospital.persistence.mybatis.AppointmentMapper">
+
+    <resultMap id="AppointmentResultMap" type="Appointment" autoMapping="false">
+        <id column="id" property="id"/>
+        <result column="departmentId" property="departmentId"/>
+        <result column="doctorId" property="doctorId"/>
+        <result column="patientId" property="patientId"/>
+        <result column="dateTime" property="dateTime"/>
+        <result column="purpose" property="purpose"/>
+        <result column="status" property="status"/>
+        <result column="billAmount" property="billAmount"/>
+    </resultMap>
+
+    <resultMap id="AppointmentDetailResultMap" type="AppointmentDetail" autoMapping="false">
+        <id column="appointmentId" property="appointmentId"/>
+        <result column="appointmentStatus" property="appointmentStatus"/>
+        <result column="hospitalAddress" property="hospitalAddress"/>
+        <result column="doctorSpecialty" property="doctorSpecialty"/>
+        <result column="doctorEmail" property="doctorEmail"/>
+        <result column="patientPhone" property="patientPhone"/>
+        <result column="hospitalName" property="hospitalName"/>
+        <result column="departmentName" property="departmentName"/>
+        <result column="roomNumber" property="roomNumber"/>
+        <result column="doctorName" property="doctorName"/>
+        <result column="patientName" property="patientName"/>
+        <result column="appointmentTime" property="appointmentTime"/>
+        <result column="diagnosis" property="diagnosis"/>
+        <result column="medication" property="medication"/>
+        <result column="insurancePolicy" property="insurancePolicy"/>
+        <result column="insuranceType" property="insuranceType"/>
+        <result column="billAmount" property="billAmount"/>
+        <result column="admittedDate" property="admittedDate"/>
+        <result column="dischargeDate" property="dischargeDate"/>
+        <result column="status" property="status"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="Appointment" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO appointments (department_id, doctor_id, patient_id, date_time, purpose, status, bill_amount)
+        VALUES (#{departmentId}, #{doctorId}, #{patientId}, #{dateTime}, #{purpose}, #{status}, #{billAmount})
+    </insert>
+
+    <select id="selectById" parameterType="long" resultMap="AppointmentResultMap">
+        SELECT id,
+               department_id AS departmentId,
+               doctor_id AS doctorId,
+               patient_id AS patientId,
+               date_time AS dateTime,
+               purpose,
+               status,
+               bill_amount AS billAmount
+        FROM appointments
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectAll" resultMap="AppointmentResultMap">
+        SELECT id,
+               department_id AS departmentId,
+               doctor_id AS doctorId,
+               patient_id AS patientId,
+               date_time AS dateTime,
+               purpose,
+               status,
+               bill_amount AS billAmount
+        FROM appointments
+    </select>
+
+    <select id="selectByDoctor" parameterType="long" resultMap="AppointmentResultMap">
+        SELECT id,
+               department_id AS departmentId,
+               doctor_id AS doctorId,
+               patient_id AS patientId,
+               date_time AS dateTime,
+               purpose,
+               status,
+               bill_amount AS billAmount
+        FROM appointments
+        WHERE doctor_id = #{doctorId}
+    </select>
+
+    <select id="selectByPatient" parameterType="long" resultMap="AppointmentResultMap">
+        SELECT id,
+               department_id AS departmentId,
+               doctor_id AS doctorId,
+               patient_id AS patientId,
+               date_time AS dateTime,
+               purpose,
+               status,
+               bill_amount AS billAmount
+        FROM appointments
+        WHERE patient_id = #{patientId}
+    </select>
+
+    <select id="selectUpcomingDetails" parameterType="map" resultMap="AppointmentDetailResultMap">
+        SELECT appt.id AS appointmentId,
+               appt.status AS appointmentStatus,
+               appt.bill_amount AS billAmount,
+               h.name AS hospitalName,
+               h.address AS hospitalAddress,
+               d.name AS departmentName,
+               r.number AS roomNumber,
+               doc.full_name AS doctorName,
+               doc.specialty AS doctorSpecialty,
+               doc.email AS doctorEmail,
+               p.full_name AS patientName,
+               p.phone AS patientPhone,
+               appt.date_time AS appointmentTime,
+               tr.diagnosis AS diagnosis,
+               pr.medication AS medication,
+               ins.policy_number AS insurancePolicy,
+               it.name AS insuranceType,
+               adm.admitted_date AS admittedDate,
+               adm.discharge_date AS dischargeDate,
+               adm.status AS status
+        FROM appointments appt
+                 JOIN departments d ON appt.department_id = d.id
+                 JOIN hospitals h ON d.hospital_id = h.id
+                 JOIN doctors doc ON appt.doctor_id = doc.id
+                 LEFT JOIN patients p ON appt.patient_id = p.id
+                 LEFT JOIN rooms r ON r.department_id = d.id
+                 LEFT JOIN insurances ins ON p.insurance_id = ins.id
+                 LEFT JOIN insurance_types it ON ins.insurance_type_id = it.id
+                 LEFT JOIN treatments tr ON tr.patient_id = p.id AND tr.doctor_id = doc.id
+                 LEFT JOIN prescriptions pr ON pr.treatment_id = tr.id
+                 LEFT JOIN admissions adm ON adm.patient_id = p.id
+        WHERE appt.date_time >= #{fromDateTime}
+        ORDER BY appt.date_time
+    </select>
+
+    <update id="update" parameterType="Appointment">
+        UPDATE appointments
+        SET department_id = #{departmentId},
+            doctor_id = #{doctorId},
+            patient_id = #{patientId},
+            date_time = #{dateTime},
+            purpose = #{purpose},
+            status = #{status},
+            bill_amount = #{billAmount}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="long">
+        DELETE FROM appointments WHERE id = #{id}
+    </delete>
+
+</mapper>
