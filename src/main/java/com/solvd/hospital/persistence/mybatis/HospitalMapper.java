@@ -10,6 +10,8 @@ public interface HospitalMapper {
 
     Hospital selectById(Long id);
 
+    Hospital selectByIdWithDepartments(Long id);
+
     List<Hospital> selectAll();
 
     int update(Hospital hospital);

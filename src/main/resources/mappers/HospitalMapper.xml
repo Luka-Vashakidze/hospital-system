@@ -14,6 +14,23 @@
         <result column="updatedAt" property="updatedAt"/>
     </resultMap>
 
+    <resultMap id="HospitalWithDepartmentsResultMap" type="Hospital" autoMapping="false">
+        <id column="hospitalId" property="id"/>
+        <result column="hospitalName" property="name"/>
+        <result column="hospitalAddress" property="address"/>
+        <result column="hospitalPhone" property="phone"/>
+        <result column="hospitalEmail" property="email"/>
+        <result column="hospitalCreatedAt" property="createdAt"/>
+        <result column="hospitalUpdatedAt" property="updatedAt"/>
+        <collection property="departments" ofType="Department" autoMapping="false">
+            <id column="departmentId" property="id"/>
+            <result column="departmentHospitalId" property="hospitalId"/>
+            <result column="departmentCode" property="code"/>
+            <result column="departmentName" property="name"/>
+            <result column="departmentDescription" property="description"/>
+        </collection>
+    </resultMap>
+
     <insert id="insert" parameterType="Hospital" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO hospitals (name, address, phone, email, created_at, updated_at)
         VALUES (#{name}, #{address}, #{phone}, #{email}, #{createdAt}, #{updatedAt})
@@ -29,6 +46,24 @@
                updated_at AS updatedAt
         FROM hospitals
         WHERE id = #{id}
+    </select>
+
+    <select id="selectByIdWithDepartments" parameterType="long" resultMap="HospitalWithDepartmentsResultMap">
+        SELECT h.id          AS hospitalId,
+               h.name        AS hospitalName,
+               h.address     AS hospitalAddress,
+               h.phone       AS hospitalPhone,
+               h.email       AS hospitalEmail,
+               h.created_at  AS hospitalCreatedAt,
+               h.updated_at  AS hospitalUpdatedAt,
+               d.id          AS departmentId,
+               d.hospital_id AS departmentHospitalId,
+               d.code        AS departmentCode,
+               d.name        AS departmentName,
+               d.description AS departmentDescription
+        FROM hospitals h
+                 LEFT JOIN departments d ON d.hospital_id = h.id
+        WHERE h.id = #{id}
     </select>
 
     <select id="selectAll" resultMap="HospitalResultMap">
