@@ -35,7 +35,7 @@ public class HospitalRepositoryMyBatisImpl implements HospitalRepository {
     public Optional<Hospital> findById(Long id) {
         try (SqlSession session = sqlSessionFactory.openSession()) {
             HospitalMapper mapper = session.getMapper(HospitalMapper.class);
-            return Optional.ofNullable(mapper.selectById(id));
+            return Optional.ofNullable(mapper.selectByIdWithDepartments(id));
         }
     }
 
